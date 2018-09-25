@@ -1,14 +1,15 @@
 import getpass
-from Github.GithubRequester import GithubRequester
+from Crawler.Crawler import Crawler
+
+LANGUAGE = 'java'
+PER_PAGE = 100
 
 username = raw_input("Username: ")
 password = getpass.getpass("Password: ")
 
-github_requester = GithubRequester(username, password)
-results = github_requester.search_repositories(language='java')
-
-
-for page in range(0, 9):
-    repos = results.get_page(page)
-    for repo in repos:
-        print(repo)
+crawler = Crawler(username=username, password=password, language=LANGUAGE, per_page=PER_PAGE)
+repos = crawler.repositories()
+print(len(repos))
+print (repos[0].default_branch)
+codes = crawler.codes(repos[0].full_name)
+print(codes[0])
