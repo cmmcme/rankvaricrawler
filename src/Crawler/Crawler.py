@@ -1,3 +1,4 @@
+from time import sleep
 import sys
 sys.path.insert(0, '/src')
 from Github.GithubRequester import GithubRequester
@@ -24,7 +25,7 @@ class Crawler(object):
         length = self._get_page_length(paginated_list.totalCount)
      #   print(length)
         for page in range(0, length):
-     #       print(page)
+            sleep(0.03)
             results += paginated_list.get_page(page) #
 
         return results
